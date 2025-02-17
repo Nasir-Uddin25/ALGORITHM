@@ -38,7 +38,10 @@ int main()
     memset(vis, false, sizeof(vis));
 
     dfs(si, sj);
-  
+
+    if (grid[si][sj] == '-' || grid[di][dj] == '-')
+        cout << "NO" << endl;
+    return 0;
 
     if ((di, dj))
         cout << "YES" << endl;
