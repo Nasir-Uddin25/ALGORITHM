@@ -3,8 +3,9 @@ using namespace std;
 char grid[105][105];
 bool vis[105][105];
 int level[105][105];
-pair<int,int> parent[105][105];
-vector<pair<int, int>> d = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+pair<int, int> parent[105][105];
+
+vector<pair<int, int>> d = {{-1, 0}, {0, 1}, {0, -1}, {1, 0}};
 int n, m;
 
 bool valid(int i, int j)
@@ -31,12 +32,13 @@ void bfs(int si, int sj)
         {
             int ci = par_i + d[i].first;
             int cj = par_j + d[i].second;
-            if (valid(ci, cj) && !vis[ci][cj] && grid[ci][cj] == '.')
+
+            if (valid(ci, cj) && !vis[ci][cj] && (grid[ci][cj] == '.' || grid[ci][cj] == 'D' || grid[ci][cj] == 'R'))
             {
                 q.push({ci, cj});
                 vis[ci][cj] = true;
                 level[ci][cj] = level[par_i][par_j] + 1;
-                parent[ci][cj] = {par_i,par_j};
+                parent[ci][cj] = {par_i, par_j};
             }
         }
     }
@@ -44,6 +46,7 @@ void bfs(int si, int sj)
 
 int main()
 {
+
     cin >> n >> m;
 
     int si, sj, di, dj;
@@ -52,12 +55,12 @@ int main()
         for (int j = 0; j < m; j++)
         {
             cin >> grid[i][j];
-            if (grid[i][j] == 'A')
+            if (grid[i][j] == 'D')
             {
                 si = i;
                 sj = j;
             }
-            if (grid[i][j] == 'B')
+            if (grid[i][j] == 'R')
             {
                 di = i;
                 dj = j;
@@ -67,12 +70,35 @@ int main()
 
     memset(vis, false, sizeof(vis));
     memset(level, -1, sizeof(level));
+    memset(parent, -1, sizeof(parent));
     bfs(si, sj);
 
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < m; j++)
-            if (vis[i][j])
-                grid[i][j] = 'o';
+    if (!vis[di][dj])
+    {
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                cout << grid[i][j];
+            }
+            cout << endl;
+        }
+        return 0;
+    }
+    int x = di, y = dj;
+
+    while (1)
+    {
+        pair<int, int> par = parent[x][y];
+        x = par.first;
+        y = par.second;
+
+        if (grid[x][y] == 'D')
+        {
+            break;
+        }
+        grid[x][y] = 'X';
+    }
 
     for (int i = 0; i < n; i++)
     {
@@ -83,13 +109,5 @@ int main()
         cout << endl;
     }
 
-    int x = di, y = dj;
-    while(1)
-    {
-        if(grid[x][y] == 'A')
-        break;
-
-        grid[x][y] = 'o';
-    }
     return 0;
-}
+} 
