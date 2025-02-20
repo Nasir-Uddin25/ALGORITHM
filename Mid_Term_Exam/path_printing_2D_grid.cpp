@@ -21,6 +21,7 @@ void bfs(int si, int sj)
     q.push({si, sj});
     vis[si][sj] = true;
     level[si][sj] = 0;
+    
     while (!q.empty())
     {
         pair<int, int> par = q.front();
@@ -39,6 +40,7 @@ void bfs(int si, int sj)
                 vis[ci][cj] = true;
                 level[ci][cj] = level[par_i][par_j] + 1;
                 parent[ci][cj] = {par_i, par_j};
+                
             }
         }
     }
