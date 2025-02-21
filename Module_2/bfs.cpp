@@ -1,26 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 vector<int> adj_list[1005];
 bool vis[1005];
-
 void bfs(int src)
 {
     queue<int> q;
     q.push(src);
     vis[src] = true;
-
     while (!q.empty())
     {
-        // ber kora ana
         int par = q.front();
         q.pop();
-        // oi node niye kaj
+
         cout << par << " ";
-        // children gulo push kora
+
         for (int child : adj_list[par])
         {
-            if (vis[child] == false)
+            if (!vis[child])
             {
                 q.push(child);
                 vis[child] = true;
@@ -28,7 +24,6 @@ void bfs(int src)
         }
     }
 }
-
 int main()
 {
     int n, e;
@@ -39,9 +34,9 @@ int main()
         int a, b;
         cin >> a >> b;
         adj_list[a].push_back(b);
-        adj_list[b].push_back(a);
+        adj_list[b].push_back(a); // undirected graph
     }
-    memset(vis, false, sizeof(vis));
+
     bfs(0);
     return 0;
 }
