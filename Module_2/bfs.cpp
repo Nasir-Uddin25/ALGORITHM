@@ -36,7 +36,7 @@ int main()
         adj_list[a].push_back(b);
         adj_list[b].push_back(a); // undirected graph
     }
-
+    memset(vis, false, sizeof(vis));
     bfs(0);
     return 0;
 }
