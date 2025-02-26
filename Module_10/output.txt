@@ -1,4 +1,1 @@
-0 3 -6 -2 
-Infinty 0 2 5 
-Infinty Infinty 0 4 
-Infinty Infinty Infinty 0 
+1
