@@ -4,10 +4,12 @@ int leader[1005];
 
 int find(int val)
 {
-    cout << val << endl;
-    if (leader[val] == -1)
+    //cout << val << endl;
+    if (leader[val] == -1) //0(logn)
         return val;
-    return find(leader[val]);
+    int par = find(leader[val]);
+    leader[val] = par;
+    return par;
 }
 int main()
 {
@@ -19,7 +21,8 @@ int main()
     leader[4] = 5;
     leader[5] = 3;
 
-   
     cout << find(4) << endl;
+    for(int i=0;i<6;i++)
+    cout << i <<" -> " << leader[i] << endl;
     return 0;
 }
