@@ -29,7 +29,7 @@ int main()
     for (int i = 1; i <= n; i++)
         dis[i] = INT_MAX;
 
-    int src, dst;
+    int src;
     cin >> src;
 
     dis[src] = 0;
@@ -48,7 +48,7 @@ int main()
         }
     }
 
- 
+
 
     bool cycle = false;
     for (auto ed : edge_list)
@@ -63,12 +63,22 @@ int main()
     }
 
     if (cycle)
-        cout << "Negative Cycle Detected" << endl;
-    else
     {
-        for (int i = 1; i <= n; i++)
-            cout << i << "->" << dis[i] << endl;
+        cout << "Negative Cycle Detected" << endl;
+        return 0;
     }
 
+    int t, dst;
+    cin >> t;
+    while (t--)
+    {
+
+        cin >> dst;
+
+        if (dis[dst] != INT_MAX)
+            cout << "Not Possible" << endl;
+        else
+            cout << dis[dst] << endl;
+    }
     return 0;
 }
