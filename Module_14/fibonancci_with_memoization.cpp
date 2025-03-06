@@ -1,14 +1,16 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-int fibo(int n)         //0(2^N)
+int dp[1005];
+int fibo(int n)         //0(N)
 {
     if (n < 2)
         return n;
-    return fibo(n - 1) + fibo(n - 2);
+    dp[n] =  fibo(n - 1) + fibo(n - 2);
+    return dp[n];
 }
 int main()
 {
+    memset(dp, -1, sizeof(dp));
     int n;
     cin >> n;
   
