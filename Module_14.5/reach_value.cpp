@@ -1,13 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool reach_value(int n)
+long long int input;
+
+bool fun(long long int n)
 {
-    if (n == 0)
+    if (n > input)
         return false;
-    int value = n * 10;
-    return reach_value(n * 10);
+
+    if (n == input)
+        return true;
+
+    bool t1 = fun(n * 10);
+    bool t2 = fun(n * 20);
+
+    return t1 || t2;
 }
+
 int main()
 {
     int t;
@@ -15,13 +24,11 @@ int main()
 
     while (t--)
     {
-        int n;
-        cin >> n;
-        reach_value(n);
-        if (reach_value(n))
-            cout << "Yes" << endl;
+        cin >> input;
+        if (fun(1))
+            cout << "YES\n";
         else
-            cout << "No" << endl;
+            cout << "NO\n";
     }
     return 0;
 }
