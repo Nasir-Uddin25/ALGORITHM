@@ -1,31 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int input;
-
-bool fun( int n)
+long long int dp[100005];
+bool fun(long long int start, long long int target)
 {
-    if (n > input)
-        return false;
-
-    if (n == input)
+    if (start == target)
         return true;
 
-    bool t1 = fun(n + 3);
-    bool t2 = fun(n * 2);
+    if (start > target)
+        return false;
 
-    return t1 || t2;
+    if (dp[start] != -1)
+        return dp[start];
+
+    dp[start] = fun(start + 3, target) || fun(start * 2, target);
+    return dp[start];
 }
 
 int main()
 {
+
     int t;
     cin >> t;
 
     while (t--)
     {
-        cin >> input;
-        if (fun(1))
+        memset(dp, -1, sizeof(dp));
+        long long int n;
+        cin >> n;
+        if (fun(1, n))
             cout << "YES" << endl;
         else
             cout << "NO" << endl;

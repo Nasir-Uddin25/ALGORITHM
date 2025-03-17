@@ -7,10 +7,8 @@ int main()
     int n;
     cin >> n;
 
-    if (n == 0 || n == 1 || n == 2 || n == 3)
-        return n;
+    vector<long long int>  tetranacci(n + 1);
 
-    int tetranacci[n + 1];
     tetranacci[0] = 0;
     tetranacci[1] = 1;
     tetranacci[2] = 1;
