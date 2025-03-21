@@ -3,6 +3,13 @@ using namespace std;
 
 void divide(int a[], int l, int r)
 {
+    for (int i = l; i <= r; i++)
+        cout << a[i] << " ";
+    cout << endl;
+
+    if (l >= r)
+        return;
+
     int mid = (l + r) / 2;
     divide(a, l, mid);
     divide(a, mid + 1, r);
